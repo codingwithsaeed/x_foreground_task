@@ -6,21 +6,22 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_foreground_task/exception/foreground_task_exception.dart';
+import 'package:flutter_foreground_task/models/android_notification_options.dart';
 import 'package:flutter_foreground_task/models/foreground_task_options.dart';
 import 'package:flutter_foreground_task/models/ios_notification_options.dart';
-import 'package:flutter_foreground_task/models/android_notification_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shared_preferences_android/shared_preferences_android.dart';
 import 'package:shared_preferences_ios/shared_preferences_ios.dart';
+
 import 'flutter_foreground_task_platform_interface.dart';
 
 export 'package:flutter_foreground_task/exception/foreground_task_exception.dart';
+export 'package:flutter_foreground_task/models/android_notification_options.dart';
 export 'package:flutter_foreground_task/models/foreground_task_options.dart';
 export 'package:flutter_foreground_task/models/ios_notification_options.dart';
 export 'package:flutter_foreground_task/models/notification_button.dart';
 export 'package:flutter_foreground_task/models/notification_channel_importance.dart';
 export 'package:flutter_foreground_task/models/notification_icon_data.dart';
-export 'package:flutter_foreground_task/models/android_notification_options.dart';
 export 'package:flutter_foreground_task/models/notification_priority.dart';
 export 'package:flutter_foreground_task/models/notification_visibility.dart';
 export 'package:flutter_foreground_task/ui/will_start_foreground_task.dart';
@@ -91,8 +92,7 @@ class FlutterForegroundTask {
   }
 
   /// Restart the foreground service.
-  static Future<bool> restartService() =>
-      FlutterForegroundTaskPlatform.instance.restartService();
+  static Future<bool> restartService() => FlutterForegroundTaskPlatform.instance.restartService();
 
   /// Update the foreground service.
   static Future<bool> updateService({
@@ -107,12 +107,10 @@ class FlutterForegroundTask {
       );
 
   /// Stop the foreground service.
-  static Future<bool> stopService() =>
-      FlutterForegroundTaskPlatform.instance.stopService();
+  static Future<bool> stopService() => FlutterForegroundTaskPlatform.instance.stopService();
 
   /// Returns whether the foreground service is running.
-  static Future<bool> get isRunningService =>
-      FlutterForegroundTaskPlatform.instance.isRunningService;
+  static Future<bool> get isRunningService => FlutterForegroundTaskPlatform.instance.isRunningService;
 
   /// Get the [ReceivePort].
   static Future<ReceivePort?> get receivePort async {
@@ -193,25 +191,20 @@ class FlutterForegroundTask {
   }
 
   /// Minimize the app to the background.
-  static void minimizeApp() =>
-      FlutterForegroundTaskPlatform.instance.minimizeApp();
+  static void minimizeApp() => FlutterForegroundTaskPlatform.instance.minimizeApp();
 
   /// Launch the app at [route] if it is not running otherwise open it.
-  static void launchApp([String? route]) =>
-      FlutterForegroundTaskPlatform.instance.launchApp(route);
+  static void launchApp([String? route]) => FlutterForegroundTaskPlatform.instance.launchApp(route);
 
   /// Toggles lockScreen visibility
   static void setOnLockScreenVisibility(bool isVisible) =>
-      FlutterForegroundTaskPlatform.instance
-          .setOnLockScreenVisibility(isVisible);
+      FlutterForegroundTaskPlatform.instance.setOnLockScreenVisibility(isVisible);
 
   /// Returns whether the app is in the foreground.
-  static Future<bool> get isAppOnForeground =>
-      FlutterForegroundTaskPlatform.instance.isAppOnForeground;
+  static Future<bool> get isAppOnForeground => FlutterForegroundTaskPlatform.instance.isAppOnForeground;
 
   /// Wake up the screen of a device that is turned off.
-  static void wakeUpScreen() =>
-      FlutterForegroundTaskPlatform.instance.wakeUpScreen();
+  static void wakeUpScreen() => FlutterForegroundTaskPlatform.instance.wakeUpScreen();
 
   /// Returns whether the app has been excluded from battery optimization.
   static Future<bool> get isIgnoringBatteryOptimizations =>
@@ -219,30 +212,28 @@ class FlutterForegroundTask {
 
   /// Open the settings page where you can set ignore battery optimization.
   static Future<bool> openIgnoreBatteryOptimizationSettings() =>
-      FlutterForegroundTaskPlatform.instance
-          .openIgnoreBatteryOptimizationSettings();
+      FlutterForegroundTaskPlatform.instance.openIgnoreBatteryOptimizationSettings();
 
   /// Request to ignore battery optimization.
   static Future<bool> requestIgnoreBatteryOptimization() =>
       FlutterForegroundTaskPlatform.instance.requestIgnoreBatteryOptimization();
 
   /// Returns whether the "android.permission.SYSTEM_ALERT_WINDOW" permission was granted.
-  static Future<bool> get canDrawOverlays =>
-      FlutterForegroundTaskPlatform.instance.canDrawOverlays;
+  static Future<bool> get canDrawOverlays => FlutterForegroundTaskPlatform.instance.canDrawOverlays;
 
   /// Open the settings page where you can allow/deny the "android.permission.SYSTEM_ALERT_WINDOW" permission.
   /// pass the `forceOpen` bool to open the permissions page even if granted.
   static Future<bool> openSystemAlertWindowSettings({bool forceOpen = false}) =>
-      FlutterForegroundTaskPlatform.instance
-          .openSystemAlertWindowSettings(forceOpen: forceOpen);
+      FlutterForegroundTaskPlatform.instance.openSystemAlertWindowSettings(forceOpen: forceOpen);
+
+  static Future<bool> openAlertActivity() => FlutterForegroundTaskPlatform.instance.openAlertActivity();
 
   /// Set up the task handler and start the foreground task.
   ///
   /// It must always be called from a top-level function, otherwise foreground task will not work.
   static void setTaskHandler(TaskHandler handler) {
     // Create a method channel to communicate with the platform.
-    const backgroundChannel =
-        MethodChannel('flutter_foreground_task/background');
+    const backgroundChannel = MethodChannel('flutter_foreground_task/background');
 
     // Binding the framework to the flutter engine.
     WidgetsFlutterBinding.ensureInitialized();

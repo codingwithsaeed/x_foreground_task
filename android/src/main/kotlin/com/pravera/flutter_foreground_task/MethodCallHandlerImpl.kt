@@ -82,14 +82,26 @@ class MethodCallHandlerImpl(private val context: Context, private val provider: 
                     ForegroundServiceUtils.openSystemAlertWindowSettings(it, 248, forceOpen)
                 }
             }
+            "openAlertActivity" -> {
+                ForegroundServiceUtils.openAlertActivity(context)
+
+            }
             else -> result.notImplemented()
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         when (requestCode) {
-            246 -> methodCallResult1?.success(ForegroundServiceUtils.isIgnoringBatteryOptimizations(context))
-            247 -> methodCallResult2?.success(ForegroundServiceUtils.isIgnoringBatteryOptimizations(context))
+            246 -> methodCallResult1?.success(
+                ForegroundServiceUtils.isIgnoringBatteryOptimizations(
+                    context
+                )
+            )
+            247 -> methodCallResult2?.success(
+                ForegroundServiceUtils.isIgnoringBatteryOptimizations(
+                    context
+                )
+            )
             248 -> methodCallResult3?.success(ForegroundServiceUtils.canDrawOverlays(context))
         }
 

@@ -153,4 +153,12 @@ class MethodChannelFlutterForegroundTask extends FlutterForegroundTaskPlatform {
     }
     return true;
   }
+
+  @override
+  Future<bool> openAlertActivity() async {
+    if (Platform.isAndroid) {
+      return await methodChannel.invokeMethod('openAlertActivity');
+    }
+    return Future.value(false);
+  }
 }

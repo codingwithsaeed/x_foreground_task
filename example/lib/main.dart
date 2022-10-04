@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:isolate';
 
 import 'package:flutter/material.dart';
@@ -24,6 +25,10 @@ class MyTaskHandler extends TaskHandler {
     final customData =
         await FlutterForegroundTask.getData<String>(key: 'customData');
     print('customData: $customData');
+    Timer(const Duration(seconds: 10), () async {
+      print('10 seconds passed');
+      await FlutterForegroundTask.openAlertActivity();
+    });
   }
 
   @override
@@ -247,6 +252,7 @@ class _ExamplePageState extends State<ExamplePage> {
         children: [
           buttonBuilder('start', onPressed: _startForegroundTask),
           buttonBuilder('stop', onPressed: _stopForegroundTask),
+
         ],
       ),
     );

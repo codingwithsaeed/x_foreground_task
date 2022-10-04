@@ -1,6 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pravera.flutter_foreground_task">
+
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application>
+        <service
+            android:name=".LockService"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <activity
+            android:name=".AlertActivity"
+            android:exported="true"
+            android:label="Test Window"
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:showOnLockScreen="true"/>
+
         <receiver
             android:name=".service.BootReceiver"
             android:enabled="true"
@@ -13,5 +32,10 @@
             android:name=".service.RestartReceiver"
             android:enabled="true"
             android:exported="false" />
+
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
     </application>
+
 </manifest>
