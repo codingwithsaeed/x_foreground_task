@@ -25,15 +25,12 @@ class MethodChannelFlutterForegroundTask extends FlutterForegroundTaskPlatform {
     Function? callback,
   }) async {
     if (await isRunningService == false) {
-      final options = Platform.isAndroid
-          ? androidNotificationOptions.toJson()
-          : iosNotificationOptions.toJson();
+      final options = Platform.isAndroid ? androidNotificationOptions.toJson() : iosNotificationOptions.toJson();
       options['notificationContentTitle'] = notificationTitle;
       options['notificationContentText'] = notificationText;
       if (callback != null) {
         options.addAll(foregroundTaskOptions.toJson());
-        options['callbackHandle'] =
-            PluginUtilities.getCallbackHandle(callback)?.toRawHandle();
+        options['callbackHandle'] = PluginUtilities.getCallbackHandle(callback)?.toRawHandle();
       }
       return await methodChannel.invokeMethod('startService', options);
     }
@@ -60,8 +57,7 @@ class MethodChannelFlutterForegroundTask extends FlutterForegroundTaskPlatform {
         'notificationContentText': notificationText,
       };
       if (callback != null) {
-        options['callbackHandle'] =
-            PluginUtilities.getCallbackHandle(callback)?.toRawHandle();
+        options['callbackHandle'] = PluginUtilities.getCallbackHandle(callback)?.toRawHandle();
       }
       return await methodChannel.invokeMethod('updateService', options);
     }
@@ -94,8 +90,7 @@ class MethodChannelFlutterForegroundTask extends FlutterForegroundTaskPlatform {
   @override
   void setOnLockScreenVisibility(bool isVisible) {
     if (Platform.isAndroid) {
-      methodChannel
-          .invokeMethod('setOnLockScreenVisibility', {'isVisible': isVisible});
+      methodChannel.invokeMethod('setOnLockScreenVisibility', {'isVisible': isVisible});
     }
   }
 
@@ -122,8 +117,7 @@ class MethodChannelFlutterForegroundTask extends FlutterForegroundTaskPlatform {
   @override
   Future<bool> openIgnoreBatteryOptimizationSettings() async {
     if (Platform.isAndroid) {
-      return await methodChannel
-          .invokeMethod('openIgnoreBatteryOptimizationSettings');
+      return await methodChannel.invokeMethod('openIgnoreBatteryOptimizationSettings');
     }
     return true;
   }
@@ -131,8 +125,7 @@ class MethodChannelFlutterForegroundTask extends FlutterForegroundTaskPlatform {
   @override
   Future<bool> requestIgnoreBatteryOptimization() async {
     if (Platform.isAndroid) {
-      return await methodChannel
-          .invokeMethod('requestIgnoreBatteryOptimization');
+      return await methodChannel.invokeMethod('requestIgnoreBatteryOptimization');
     }
     return true;
   }
@@ -148,16 +141,16 @@ class MethodChannelFlutterForegroundTask extends FlutterForegroundTaskPlatform {
   @override
   Future<bool> openSystemAlertWindowSettings({bool forceOpen = false}) async {
     if (Platform.isAndroid) {
-      return await methodChannel.invokeMethod(
-          'openSystemAlertWindowSettings', {'forceOpen': forceOpen});
+      return await methodChannel.invokeMethod('openSystemAlertWindowSettings', {'forceOpen': forceOpen});
     }
     return true;
   }
 
   @override
-  Future<bool> openAlertActivity() async {
+  Future<bool> openAlertActivity({required String time, required String title, required String desc}) async {
     if (Platform.isAndroid) {
-      return await methodChannel.invokeMethod('openAlertActivity');
+      var args = {'time': time, 'title': title, 'desc': desc};
+      return await methodChannel.invokeMethod('openAlertActivity', args);
     }
     return Future.value(false);
   }

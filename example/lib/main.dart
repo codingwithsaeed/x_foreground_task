@@ -22,12 +22,15 @@ class MyTaskHandler extends TaskHandler {
     _sendPort = sendPort;
 
     // You can use the getData function to get the stored data.
-    final customData =
-        await FlutterForegroundTask.getData<String>(key: 'customData');
+    final customData = await FlutterForegroundTask.getData<String>(key: 'customData');
     print('customData: $customData');
     Timer(const Duration(seconds: 10), () async {
       print('10 seconds passed');
-      await FlutterForegroundTask.openAlertActivity();
+      await FlutterForegroundTask.openAlertActivity(
+        time: "10:10",
+        title: "یادآوری شماره 10",
+        desc: "خرید کیک تولد همکار",
+      );
     });
   }
 
@@ -101,8 +104,7 @@ class _ExamplePageState extends State<ExamplePage> {
       androidNotificationOptions: AndroidNotificationOptions(
         channelId: 'notification_channel_id',
         channelName: 'Foreground Notification',
-        channelDescription:
-            'This notification appears when the foreground service is running.',
+        channelDescription: 'This notification appears when the foreground service is running.',
         channelImportance: NotificationChannelImportance.LOW,
         priority: NotificationPriority.LOW,
         iconData: const NotificationIconData(
@@ -140,8 +142,7 @@ class _ExamplePageState extends State<ExamplePage> {
     // If you do not use the onNotificationPressed or launchApp function,
     // you do not need to write this code.
     if (!await FlutterForegroundTask.canDrawOverlays) {
-      final isGranted =
-          await FlutterForegroundTask.openSystemAlertWindowSettings();
+      final isGranted = await FlutterForegroundTask.openSystemAlertWindowSettings();
       if (!isGranted) {
         print('SYSTEM_ALERT_WINDOW permission denied!');
         return false;
@@ -252,7 +253,6 @@ class _ExamplePageState extends State<ExamplePage> {
         children: [
           buttonBuilder('start', onPressed: _startForegroundTask),
           buttonBuilder('stop', onPressed: _stopForegroundTask),
-
         ],
       ),
     );

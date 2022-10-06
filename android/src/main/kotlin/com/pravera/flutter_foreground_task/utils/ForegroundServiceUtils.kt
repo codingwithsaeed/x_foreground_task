@@ -179,9 +179,13 @@ class ForegroundServiceUtils {
             }
         }
 
-        fun openAlertActivity(context: Context) {
+        fun openAlertActivity(context: Context, time: String, title: String, desc: String) {
             wakeUpScreen(context)
             val intent = Intent(context, AlertActivity::class.java)
+            intent.putExtra("time", time)
+            intent.putExtra("title", title)
+            intent.putExtra("desc", desc)
+
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

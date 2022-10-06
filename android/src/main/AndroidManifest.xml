@@ -10,15 +10,15 @@
         <service
             android:name=".LockService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
 
         <activity
             android:name=".AlertActivity"
             android:exported="true"
-            android:label="Test Window"
+            android:label="Reminder"
+            android:showOnLockScreen="true"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:showOnLockScreen="true"/>
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
         <receiver
             android:name=".service.BootReceiver"

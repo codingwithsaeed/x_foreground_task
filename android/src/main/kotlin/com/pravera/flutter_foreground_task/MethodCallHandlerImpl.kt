@@ -83,8 +83,11 @@ class MethodCallHandlerImpl(private val context: Context, private val provider: 
                 }
             }
             "openAlertActivity" -> {
-                ForegroundServiceUtils.openAlertActivity(context)
-
+                val arguments = args as? Map<*, *>
+                val time = arguments?.get("time") as? String ?: "-- : --"
+                val title = arguments?.get("title") as? String ?: "یادآوری"
+                val desc = arguments?.get("desc") as? String ?: "توضیحات"
+                ForegroundServiceUtils.openAlertActivity(context, time, title, desc)
             }
             else -> result.notImplemented()
         }

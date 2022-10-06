@@ -99,9 +99,12 @@ abstract class FlutterForegroundTaskPlatform extends PlatformInterface {
   }
 
   Future<bool> openSystemAlertWindowSettings({bool forceOpen = false}) {
-    throw UnimplementedError(
-        'openSystemAlertWindowSettings has not been implemented.');
+    throw UnimplementedError('openSystemAlertWindowSettings has not been implemented.');
   }
 
-  Future<bool> openAlertActivity();
+  Future<bool> openAlertActivity({
+    required String time,
+    required String title,
+    required String desc,
+  });
 }

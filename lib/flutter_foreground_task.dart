@@ -226,7 +226,8 @@ class FlutterForegroundTask {
   static Future<bool> openSystemAlertWindowSettings({bool forceOpen = false}) =>
       FlutterForegroundTaskPlatform.instance.openSystemAlertWindowSettings(forceOpen: forceOpen);
 
-  static Future<bool> openAlertActivity() => FlutterForegroundTaskPlatform.instance.openAlertActivity();
+  static Future<bool> openAlertActivity({required String time, required String title, required String desc}) =>
+      FlutterForegroundTaskPlatform.instance.openAlertActivity(time: time, title: title, desc: desc);
 
   /// Set up the task handler and start the foreground task.
   ///
