@@ -53,8 +53,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_close"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_width="170dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="32dp"
         android:text="بستن"
         android:textColor="#FFF"
